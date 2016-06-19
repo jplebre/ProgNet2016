@@ -5,14 +5,18 @@
     <meta charset="utf-8" />
     <script type="text/javascript">
 
-        function teletype(message) {
+        function teletype(form) {
+            alert(form);
+            var message = form["message"];
+            var duration = form["duration"];
+            var interval = (duration * 1000) / message.length;
             if (message.length > 0) {
                 document.getElementById("output").innerHTML += message[0];
                 window.setTimeout(function () {
                     teletype(message.substring(1));
-                }, 100);
+                }, interval);
             } else {
-                window.setTimeout(function () { alert("Done!"); }, 200);
+                window.setTimeout(function () { alert("Done!"); }, interval);
             }
         }
     </script>
@@ -21,14 +25,20 @@
             color: #0f0;
             background-color: #000;
             font-family: Consolas, courier, monospaced;
-            font-size: 200%;
+        }
+
+        p#output {
+            font-size: 150%;
         }
     </style>
 </head>
 <body>
+    <form action="javascript:teletype(this);" id="teletype-form">
+        <label for="message-input">Message:</label><input type="text" name="message" id="message-input" value="Hello, World!" placeholder="message" />
+        <label for="duration-input">Duration:</label><input type="text" id="duration-input" value="5" />
+        <input type="submit" value="Teletype!" />
+    </form>
+    <hr />
     <p id="output"></p>
-    <script>
-        teletype("Good morning ProgNET. Would you like to play a game?");
-    </script>
 </body>
 </html>
