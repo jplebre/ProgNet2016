@@ -5,6 +5,8 @@ using Nancy;
 namespace DelayWeb.Modules {
     public class IndexModule : NancyModule {
         public IndexModule() {
+            Get["/"] = _ => View["index"];
+
             Get["/hello/{name?World}"] = parameters => {
                 int delay;
                 Int32.TryParse(Request.Query["delay"], out delay);
