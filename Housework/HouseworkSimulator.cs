@@ -19,7 +19,11 @@ namespace Housework {
         private readonly DateTime simRunStartedAt = DateTime.Now;
         private readonly DateTime houseworkStartedAt = DateTime.Today.Date.AddHours(9);
 
-        public TimeSpan ElapsedTime => (TimeOfDay - houseworkStartedAt);
+        public TimeSpan ElapsedTime {
+            get {
+                return (TimeOfDay - houseworkStartedAt);
+            }
+        }
 
         public DateTime TimeOfDay {
             get {
