@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script type="text/javascript">
+
+        function teletype(elementId, message) {
+            if (message.length > 0) {
+                document.getElementById(elementId).innerHTML += message[0];
+                window.setTimeout(function() {
+                    teletype(elementId, message.substring(1));
+                }, 20);
+            } else {
+                alert("Done!");
+            }
+        }
+    </script>
+    <style>
+        html {
+            color: #0f0;
+            background-color: #000;
+            font-family: Consolas, courier, monospaced;
+        }
+    </style>
+</head>
+<body>
+    <p id="p1"></p>
+    <p id="p2"></p>
+    <script>
+        teletype("p1", "Hello, world! This is a massively long string of text being output by the first of our async functions.");
+        teletype("p2", "Hello, world! This is a massively long string of text being output by the first of our async functions.");
+    </script>
+</body>
+</html>
