@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading;
-using DelayWeb.Modules;
+using KeyQuest.Modules;
 
-namespace DelayWeb.Characters {
+namespace KeyQuest.Characters {
     public abstract class NonPlayerCharacter {
         protected NonPlayerCharacter(string name) {
             Name = name;
@@ -15,9 +15,10 @@ namespace DelayWeb.Characters {
         protected string Failure { get; set; }
         protected Func<TreasureItem, bool> IsWorthy { get; set; }
 
+        protected Random random = new Random();
         public Encounter Interact(TreasureItem item) {
+            Thread.Sleep(500 + random.Next(1000));
             if (IsWorthy(item)) {
-                Thread.Sleep(1000);
                 return new Encounter() {
                     Text = Name + String.Format(Success, item.Name, Treasure.Name),
                     Item = Treasure

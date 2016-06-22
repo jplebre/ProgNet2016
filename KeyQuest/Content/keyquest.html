@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="/Content/keyquest.css" rel="stylesheet" type="text/css" />
+    <title>KeyQuest!</title>
+    <script>
+        function tell(elementId, tale) {
+            var element = document.createElement('p');
+            var parent = document.getElementById(elementId);
+            parent.appendChild(element);
+            element.innerHTML = tale;
+        };
+
+        function gameOver(tale) {
+            var element = document.createElement('div');
+            element.className = "game-over";
+            document.body.appendChild(element);
+            element.innerHTML = "<h2>GAME OVER</h2>" + tale;
+        }
+
+        function victory(message) {
+            var element = document.createElement('div');
+            element.className = "victory";
+            document.body.appendChild(element);
+            element.innerHTML = "<h2>YOU HAVE WON!</h2>" + message;
+        }
+
+        function questify(url, elementId) {
+            return (function (item) {
+                var promise = new Promise(function (resolve, reject) {
+                    var request = new XMLHttpRequest();
+                    //Send the proper header information along with the request
+                    request.open('POST', url);
+                    request.setRequestHeader("Content-type", "application/json");
+                    request.onload = function () {
+                        if (request.status == 200) {
+                            var result = JSON.parse(request.response);
+                            tell(elementId, result.text);
+                            resolve(result.item); // we got data here, so resolve the Promise
+                        } else {
+                            reject(Error(request.statusText)); // status is not 200 OK, so reject
+                        }
+                    };
+
+                    request.onerror = function () {
+                        reject(Error('Error fetching data.')); // error occurred, reject the  Promise
+                    };
+                    request.send(JSON.stringify(item)); //send the request
+                });
+                return (promise);
+            });
+        }
+
+        function runQuest() {
+            var controlKeyQuest = questify("/weaver", "ctrl-div")()
+                .then(questify("/knight", "ctrl-div"))
+                .then(questify("/wizard", "ctrl-div"))
+                .catch(gameOver);
+
+            var bagOfGold = { name: "Big Bag of Gold" };
+            var altKeyQuest = questify("/keysmith", "alt-div")(bagOfGold)
+                .then(questify("/cleric", "alt-div"))
+                .catch(gameOver);
+            ;
+            var diamond = { name: "Diamond of Multiple Inheritance" };
+            var deleteKeyQuest = questify("/earl", "delete-div")(diamond)
+                .catch(gameOver);
+            ;
+
+            Promise.all([controlKeyQuest, altKeyQuest, deleteKeyQuest])
+                .then(function (values) {
+                    //todo: something cool using the three keys to the Kingdom of Winderos.
+                    if (values.length == 3) {
+                        victory('You have retrieved the Three Keys to the Kingdom of Winderos. Which is nice.');
+                    }
+                });
+        }
+    </script>
+</head>
+<body>
+    <h1>Welcome to KeyQuest!</h1>
+    <p>You are King Mozilla of Winderos. An ancient curse is upon your lands, and to lift the curse you must recover three magical keys.</p>
+    <ul>
+        <li>
+            The Control Key is guarded by the evil wizard Ballmerack, who lives at <code>/wizard.</code>
+        </li>
+        <li>
+            The Alt key is guarded by the cleric Baliskov, who lives at <code>/cleric</code>
+        </li>
+        <li>The Delete Key is guarded by the Earl of Ang, who lives at <code>/earl</code></li>
+    </ul>
+    <a href="javascript:runQuest();">BEGIN YOUR QUEST!</a>
+    <hr />
+    <div class="quests">
+        <div id="ctrl-div">
+            <h3>The Quest for the Control Key</h3>
+        </div>
+        <div id="alt-div">
+            <h3>The Quest for the Alt Key</h3>
+        </div>
+        <div id="delete-div">
+            <h3>The Quest for the Delete Key</h3>
+        </div>
+    </div>
+</body>
+</html>

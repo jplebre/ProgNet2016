@@ -7,12 +7,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{ED638DD5-E755-4B7A-940D-5C94AB425686}</ProjectGuid>
+    <ProjectGuid>{DC6B51E2-37B5-479F-AC09-8DE10A827FD6}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DelayWeb</RootNamespace>
-    <AssemblyName>DelayWeb</AssemblyName>
+    <RootNamespace>KeyQuest</RootNamespace>
+    <AssemblyName>KeyQuest</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -45,13 +45,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Nancy, Version=1.4.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Nancy.1.4.3\lib\net40\Nancy.dll</HintPath>
+    <Reference Include="Nancy, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nancy.1.4.1\lib\net40\Nancy.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Nancy.Hosting.Aspnet, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Nancy.Hosting.Aspnet.1.4.1\lib\net40\Nancy.Hosting.Aspnet.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -65,16 +65,33 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\ajax.html" />
+    <Content Include="Content\callback_chains.html" />
+    <Content Include="Content\keyquest.css" />
+    <Content Include="Content\nancy-logo.png" />
+    <Content Include="Content\keyquest.html" />
+    <Content Include="Content\teletype.html" />
     <Content Include="icon.png" />
+    <Content Include="Views\index.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Characters\Cleric.cs" />
+    <Compile Include="Characters\Earl.cs" />
+    <Compile Include="Characters\Keysmith.cs" />
+    <Compile Include="Characters\Knight.cs" />
+    <Compile Include="Characters\NonPlayerCharacter.cs" />
+    <Compile Include="Characters\Weaver.cs" />
+    <Compile Include="Characters\Wizard.cs" />
+    <Compile Include="Modules\Encounter.cs" />
+    <Compile Include="Modules\IndexModule.cs" />
+    <Compile Include="Modules\QuestModule.cs" />
+    <Compile Include="Modules\TreasureItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -97,9 +114,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>54610</DevelopmentServerPort>
+          <DevelopmentServerPort>50297</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:54610/</IISUrl>
+          <IISUrl>http://localhost:50297/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -1,7 +1,7 @@
 using System;
-using DelayWeb.Modules;
+using KeyQuest.Modules;
 
-namespace DelayWeb.Characters {
+namespace KeyQuest.Characters {
     public class Weaver : NonPlayerCharacter {
         public Weaver(string name)
             : base(name) {
