@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style>
+        html {
+            font-family: Arial;
+        }
+
+        p.game-over {
+            color: red;
+        }
+    </style>
+    <script>
+        function tell(tale) {
+            var element = document.createElement('p');
+            document.body.appendChild(element);
+            element.innerHTML = tale;
+        };
+
+        function gameOver(tale) {
+            var element = document.createElement('p');
+            element.className = "game-over";
+            document.body.appendChild(element);
+            element.innerHTML = tale;
+        }
+
+        var questify = function (url) {
+            return (function (item) {
+                var promise = new Promise(function (resolve, reject) {
+                    var request = new XMLHttpRequest();
+                    //Send the proper header information along with the request
+                    request.open('POST', url);
+                    request.setRequestHeader("Content-type", "application/json");
+                    request.onload = function () {
+                        if (request.status == 200) {
+                            var result = JSON.parse(request.response);
+                            tell(result.text);
+                            resolve(result.item); // we got data here, so resolve the Promise
+                        } else {
+                            reject(Error(request.statusText)); // status is not 200 OK, so reject
+                        }
+                    };
+
+                    request.onerror = function () {
+                        reject(Error('Error fetching data.')); // error occurred, reject the  Promise
+                    };
+                    request.send(JSON.stringify(item)); //send the request
+                });
+                return (promise);
+            });
+        }
+
+        var controlKeyQuest = questify("/weaver")()
+            .then(questify("/knight"))
+            .then(questify("/wizard"))
+            .catch(function (error) { gameOver(error); });
+        var altKeyQuest = questify("/cleric")({ name: "Shift Key" });
+        var deleteKeyQuest = questify("/earl")({ name: "Double Diamond of Multiple Inheritance" });
+
+        Promise.all([controlKeyQuest, altKeyQuest, deleteKeyQuest]).then(function (values) {
+            if (values.length == 3) {
+                tell('You have retrieved the Three Keys to the Kingdom of Winderos!');
+            }
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -66,6 +66,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\ajax.html" />
+    <Content Include="Content\promises.html" />
+    <Content Include="Content\callback_chains.html" />
     <Content Include="Content\teletype.html" />
     <Content Include="icon.png" />
     <Content Include="Views\index.html" />
@@ -73,7 +75,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Characters\Cleric.cs" />
+    <Compile Include="Characters\Weaver.cs" />
+    <Compile Include="Characters\Earl.cs" />
+    <Compile Include="Modules\Encounter.cs" />
     <Compile Include="Modules\IndexModule.cs" />
+    <Compile Include="Characters\Knight.cs" />
+    <Compile Include="Characters\NonPlayerCharacter.cs" />
+    <Compile Include="Modules\TreasureItem.cs" />
+    <Compile Include="Characters\Wizard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
