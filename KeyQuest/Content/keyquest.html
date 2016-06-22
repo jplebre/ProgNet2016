@@ -39,7 +39,8 @@
     <br style="clear: both;" />
     <hr style=" margin-top: 16px;" />
     <h2>How to Play</h2>
-    <p>To complete your quest, you need to retrieve various magical items from the inhabitants of Winderos. Fortunately, all the inhabitants of Winderos speak HTTP+JSON.</p>
+    <p>To complete your quest, you need to edit <a href="/Content/KeyQuest.js">keyquest.js</a> retrieve various magical items from the inhabitants of Winderos. Fortunately, all the inhabitants of Winderos speak HTTP+JSON.</p>
+    <p>You can see a list of all the available characters at <a href="/help">/help</a></p>
     <p>To interact with one of the characters, you need to make an HTTP POST to their endpoint. Some interactions require you to use a magical item, or offer them a piece of treasure.</p>
     <p>Here's how you would offer the Talisman of Optimisation to the cleric Baliskov:</p>
 <pre>
@@ -47,31 +48,15 @@ POST /cleric HTTP/1.1
 { "name" : "Talisman of Optimisation" }
 </pre>
     <p>If your encounter is successful, they'll return a 200 OK and include a magical item in JSON format. If your encounter is not successful, they'll return an HTTP error status and your quest is over.</p>
-<table>
-    <tr>
-        <td>Baliskov, the Cleric</td><td>/cleric</td><td>The Alt Key</td>
-    </tr>
-    <tr>
-        <td>Ballmerack, the Evil Wizard</td><td>/wizard</td><td>The Control Key</td>
-    </tr>
-    <tr>
-        <td>The Earl of Ang</td>
-        <td>/earl</td>
-        <td>The Delete Key</td>
-    </tr>
-    <tr>
-        <td>Cherry, the Keysmith</td>
-        <td>/keysmith</td>
-        <td>The Key of Shifting</td>
-    </tr>
-    <tr>
-        <td>Sir Timber Nurzly</td>
-        <td>/knight</td>
-        <td>The Potion of Immutability</td>
-    </tr>
-    <tr>
-        <td></td>
-    </tr>
-</table>
+    <h2>Workshop Objectives</h2>
+    <ol>
+        <li>Use JavaScript Promises and create a promise chain to get the Control Key from the evil wizard Ballmerack.</li>
+        <li>Once you've done that, create promise chains for retrieving the Alt Key and the Delete Key</li>
+        <li>
+            Use the <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise/all"><code>Promise.all([a,b,c])</code></a> method to
+            run some code when you've retrieved all three keys.
+        </li>
+        <li>Bonus points: add an extra character and encounter to each of your three quests.</li>
+    </ol>
 </body>
 </html>

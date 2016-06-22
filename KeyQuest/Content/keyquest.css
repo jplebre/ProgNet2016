@@ -19,12 +19,16 @@ div.quests div {
     height: 250px;
     padding: 4px;
 }
-div.quests div div {
-    border: 1px solid #900;
-    width: 100%;
-    border-radius: 8px;
-}
-div.quests div div h3 { text-align: center; }
+
+    div.quests div div {
+        border: 1px solid #900;
+        width: 100%;
+        border-radius: 8px;
+    }
+
+        div.quests div div h3 {
+            text-align: center;
+        }
 
 div.game-over, div.victory {
     position: absolute;
@@ -45,3 +49,17 @@ div.game-over {
 div.victory {
     background-color: #090;
 }
+
+table.npc-list {
+    border-collapse: collapse;
+}
+
+    table.npc-list tr th {
+        background-color: #ccc;
+        text-align: left;
+    }
+
+    table.npc-list tr td, table.npc-list tr th {
+        border: 1px solid #333;
+        padding: 8px;
+    }

@@ -9,11 +9,11 @@ namespace KeyQuest.Characters {
         }
 
 
-        protected string Name { get; set; }
-        protected TreasureItem Treasure { get; set; }
-        protected string Success { get; set; }
-        protected string Failure { get; set; }
-        protected Func<TreasureItem, bool> IsWorthy { get; set; }
+        public string Name { get; protected set; }
+        public TreasureItem Treasure { get; protected set; }
+        public string Success { get; protected set; }
+        public string Failure { get; protected set; }
+        public Func<TreasureItem, bool> IsWorthy { get; protected   set; }
 
         protected Random random = new Random();
         public Encounter Interact(TreasureItem item) {

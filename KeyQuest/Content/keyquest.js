@@ -1,15 +1,15 @@
-﻿function tell(elementId, tale) {
+﻿function report(elementId, message) {
     var element = document.createElement('p');
     var parent = document.getElementById(elementId);
     parent.appendChild(element);
-    element.innerHTML = tale;
+    element.innerHTML = message;
 };
 
-function gameOver(tale) {
+function gameOver(message) {
     var element = document.createElement('div');
     element.className = "game-over";
     document.body.appendChild(element);
-    element.innerHTML = "<h2>GAME OVER!</h2>" + tale;
+    element.innerHTML = "<h2>GAME OVER!</h2>" + message;
 }
 
 function victory(message) {
@@ -30,7 +30,7 @@ function questify(url, elementId) {
             request.onload = function () {
                 if (request.status == 200) {
                     var result = JSON.parse(request.response);
-                    tell(elementId, result.text);
+                    report(elementId, result.text);
                     resolve(result.item); // we got data here, so resolve the Promise
                 } else {
                     reject(Error(request.statusText)); // status is not 200 OK, so reject
@@ -47,24 +47,9 @@ function questify(url, elementId) {
 }
 
 function runQuest() {
-    var controlKeyQuest = questify("/weaver", "ctrl-div")()
-        .then(questify("/knight", "ctrl-div"))
-        .then(questify("/wizard", "ctrl-div"));
-
-    var bagOfGold = { name: "Big Bag of Gold" };
-    var altKeyQuest = questify("/keysmith", "alt-div")(bagOfGold)
-        .then(questify("/cleric", "alt-div"));
-    ;
-    var diamond = { name: "Emerald of Multiple Inheritance" };
-    var deleteKeyQuest = questify("/earl", "delete-div")(diamond);
-
-
-
-    Promise.all([controlKeyQuest, altKeyQuest, deleteKeyQuest])
-        .then(function (values) {
-            //todo: something cool using the three keys to the Kingdom of Winderos.
-            if (values.length == 3) {
-                victory('You have retrieved the Three Keys to the Kingdom of Winderos. Which is nice.');
-            }
-        }).catch(gameOver);;
+    //TODO: extend this runQuest method to complete all three quests and retrieve all three keys.
+    var quest = questify("/wizard", "ctrl-div");
+    var bagOfGold = { name: "Bag of Gold" };
+    quest(bagOfGold)
+        .catch(gameOver);
 }

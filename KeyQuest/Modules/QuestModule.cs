@@ -4,6 +4,7 @@ using System.ComponentModel.Design;
 using KeyQuest.Characters;
 using Nancy;
 using Nancy.ModelBinding;
+using Nancy.ViewEngines.Razor;
 
 namespace KeyQuest.Modules {
     public class QuestModule : NancyModule {
@@ -41,7 +42,9 @@ namespace KeyQuest.Modules {
                 Post[path] = _ => Encounter(characters[path]);
             }
 
-            Get["/help"] = _ => characters;
+            Get["/help"] = _ => {
+                return View["help", characters];
+            };
             //Post["/knight"] = _ => Encounter(knight);
             //Post["/cleric"] = _ => Encounter(cleric);
             //Post["/earl"] = _ => Encounter(earl);
