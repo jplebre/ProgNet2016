@@ -68,6 +68,7 @@
     <Content Include="Content\ajax.html" />
     <Content Include="Content\callback_chains.html" />
     <Content Include="Content\keyquest.css" />
+    <Content Include="Content\keyquest.js" />
     <Content Include="Content\nancy-logo.png" />
     <Content Include="Content\keyquest.html" />
     <Content Include="Content\teletype.html" />
