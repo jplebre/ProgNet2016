@@ -15,7 +15,7 @@
             var element = document.createElement('div');
             element.className = "game-over";
             document.body.appendChild(element);
-            element.innerHTML = "<h2>GAME OVER</h2>" + tale;
+            element.innerHTML = "<h2>GAME OVER!</h2>" + tale;
         }
 
         function victory(message) {
@@ -32,6 +32,7 @@
                     //Send the proper header information along with the request
                     request.open('POST', url);
                     request.setRequestHeader("Content-type", "application/json");
+                    request.setRequestHeader("Accept", "application/json");
                     request.onload = function () {
                         if (request.status == 200) {
                             var result = JSON.parse(request.response);
@@ -54,18 +55,16 @@
         function runQuest() {
             var controlKeyQuest = questify("/weaver", "ctrl-div")()
                 .then(questify("/knight", "ctrl-div"))
-                .then(questify("/wizard", "ctrl-div"))
-                .catch(gameOver);
+                .then(questify("/wizard", "ctrl-div"));
 
             var bagOfGold = { name: "Big Bag of Gold" };
             var altKeyQuest = questify("/keysmith", "alt-div")(bagOfGold)
-                .then(questify("/cleric", "alt-div"))
-                .catch(gameOver);
+                .then(questify("/cleric", "alt-div"));
             ;
-            var diamond = { name: "Diamond of Multiple Inheritance" };
-            var deleteKeyQuest = questify("/earl", "delete-div")(diamond)
-                .catch(gameOver);
-            ;
+            var diamond = { name: "Emerald of Multiple Inheritance" };
+            var deleteKeyQuest = questify("/earl", "delete-div")(diamond);
+
+
 
             Promise.all([controlKeyQuest, altKeyQuest, deleteKeyQuest])
                 .then(function (values) {
@@ -73,7 +72,7 @@
                     if (values.length == 3) {
                         victory('You have retrieved the Three Keys to the Kingdom of Winderos. Which is nice.');
                     }
-                });
+                }).catch(gameOver);;
         }
     </script>
 </head>
@@ -82,25 +81,43 @@
     <p>You are King Mozilla of Winderos. An ancient curse is upon your lands, and to lift the curse you must recover three magical keys.</p>
     <ul>
         <li>
-            The Control Key is guarded by the evil wizard Ballmerack, who lives at <code>/wizard.</code>
+            The Control Key is guarded by the evil wizard Ballmerack
         </li>
         <li>
-            The Alt key is guarded by the cleric Baliskov, who lives at <code>/cleric</code>
+            The Alt key is guarded by the cleric Baliskov
         </li>
-        <li>The Delete Key is guarded by the Earl of Ang, who lives at <code>/earl</code></li>
+        <li>The Delete Key is guarded by the Earl of Ang</li>
     </ul>
     <a href="javascript:runQuest();">BEGIN YOUR QUEST!</a>
     <hr />
     <div class="quests">
-        <div id="ctrl-div">
-            <h3>The Quest for the Control Key</h3>
+        <div>
+            <div id="ctrl-div">
+                <h3>The Quest for the Control Key</h3>
+            </div>
         </div>
-        <div id="alt-div">
-            <h3>The Quest for the Alt Key</h3>
+        <div>
+            <div id="alt-div">
+                <h3>The Quest for the Alt Key</h3>
+            </div>
         </div>
-        <div id="delete-div">
-            <h3>The Quest for the Delete Key</h3>
+        <div>
+            <div id="delete-div">
+                <h3>The Quest for the Delete Key</h3>
+            </div>
         </div>
     </div>
+    <br style="clear: both;" />
+    <hr style=" margin-top: 16px;" />
+    <h2>How to Play</h2>
+    <p>To complete your quest, you need to retrieve various magical items from the inhabitants of Winderos. Fortunately, all the inhabitants of Winderos speak HTTP+JSON.</p>
+    <p>To interact with one of the characters, you need to make an HTTP POST to their endpoint. Some interactions require you to use a magical item, or offer them a piece of treasure.</p>
+    <p>Here's how you would offer the Talisman of Optimisation to the cleric Baliskov:</p>
+<pre>
+POST /cleric HTTP/1.1
+{ "name" : "Talisman of Optimisation" }
+</pre>
+    <p>If your encounter is successful, they'll return a 200 OK and include a magical item in JSON format. If your encounter is not successful, they'll return an HTTP error status and your quest is over.</p>
+
 </body>
 </html>

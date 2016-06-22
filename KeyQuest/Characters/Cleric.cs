@@ -9,7 +9,7 @@ namespace KeyQuest.Characters {
             Failure = " is not interested in the {0} - you should have offered her a key. She casts you into a contravariant subclass, and you spend the rest of your life trying to prove that all squares are rectangles.";
             Treasure = new TreasureItem() {
                 Name = "Alt Key",
-                Description = "The Alt Key is one of the three Keys to the Kingdom of Winderos"
+                Description = "The Alt Key gives you the power of shape-shifting."
             };
         }
 

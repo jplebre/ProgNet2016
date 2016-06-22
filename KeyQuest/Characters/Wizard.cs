@@ -9,7 +9,7 @@ namespace KeyQuest.Characters {
             Failure = " is not interested in {0}. You should have brought him a potion instead.";
             Treasure = new TreasureItem() {
                 Name = "Control Key",
-                Description = "The Control Key is one of the three Keys to the Kingdom of Winderos"
+                Description = "The Control Key gives you the power to control animals."
             };
         }
     }

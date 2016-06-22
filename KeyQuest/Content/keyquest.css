@@ -15,11 +15,16 @@ div.quests div {
     width: 33%;
     box-sizing: border-box;
     margin: 0px;
-    border: 1px solid #000;
     float: left;
-    height: 500px;
+    height: 250px;
     padding: 4px;
 }
+div.quests div div {
+    border: 1px solid #900;
+    width: 100%;
+    border-radius: 8px;
+}
+div.quests div div h3 { text-align: center; }
 
 div.game-over, div.victory {
     position: absolute;

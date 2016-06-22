@@ -9,7 +9,7 @@ namespace KeyQuest.Characters {
             Failure = " is furious with you for wasting his time! He tosses the {0} aside, and banishes you to his deepest dungeons... forever. Next time, bring him the Diamond of Multiple Inheritance";
             Treasure = new TreasureItem() {
                 Name = "Delete Key",
-                Description = "The Delete Key is one of the three Keys to the Kingdom of Winderos"
+                Description = "The Delete Key gives you the power to turn back time."
             };
         }
     }
