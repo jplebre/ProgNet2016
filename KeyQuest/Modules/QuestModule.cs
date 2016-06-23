@@ -27,6 +27,7 @@ namespace KeyQuest.Modules {
         private readonly Earl earl = new Earl("Earl Ang");
         private readonly Wizard wizard = new Wizard("Ballmerack");
         private readonly Keysmith keysmith = new Keysmith("Cherry");
+        private readonly Cartman cartman = new Cartman("Cartman");
         private Dictionary<string, NonPlayerCharacter> characters;
         public QuestModule() {
 
@@ -36,7 +37,8 @@ namespace KeyQuest.Modules {
                 {"/weaver", weaver},
                 {"/earl", earl},
                 {"/wizard", wizard},
-                {"/keysmith", keysmith}
+                {"/keysmith", keysmith},
+                {"/cartman", cartman }
             };
             foreach (var path in characters.Keys) {
                 Post[path] = _ => Encounter(characters[path]);

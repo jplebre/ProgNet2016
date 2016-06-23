@@ -117,6 +117,7 @@
     <Compile Include="Characters\Keysmith.cs" />
     <Compile Include="Characters\Knight.cs" />
     <Compile Include="Characters\NonPlayerCharacter.cs" />
+    <Compile Include="Characters\Cartman.cs" />
     <Compile Include="Characters\Weaver.cs" />
     <Compile Include="Characters\Wizard.cs" />
     <Compile Include="Modules\Encounter.cs" />

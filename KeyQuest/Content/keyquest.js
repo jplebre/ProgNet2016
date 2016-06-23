@@ -48,8 +48,28 @@ function questify(url, elementId) {
 
 function runQuest() {
     //TODO: extend this runQuest method to complete all three quests and retrieve all three keys.
-    var quest = questify("/wizard", "ctrl-div");
-    var bagOfGold = { name: "Bag of Gold" };
-    quest(bagOfGold)
-        .catch(gameOver);
+    var talkToTheKnight = questify("/knight", "ctrl-div");
+    var talkToTheCleric = questify("/cleric", "alt-div");
+    var talkToCartman = questify("/cartman", "delete-div");
+    var talkToTheWizard = questify("/wizard", "ctrl-div");
+    var talkToTheWeaver = questify("/weaver", "ctrl-div");
+    var talkToTheEarlLang = questify("/earl", "delete-div");
+    var talkToTheBlacksmith = questify("/keysmith", "alt-div");
+
+    var bagOfGold = { name: "Bag Of Gold" };
+
+    var p1 = talkToTheWeaver()
+                .then(talkToTheKnight)
+                .then(talkToTheWizard);
+
+    var p2 = talkToTheBlacksmith(bagOfGold)
+                .then(talkToTheCleric);
+
+    var p3 = talkToCartman(bagOfGold)
+                .then(talkToTheEarlLang);
+
+    Promise.all([p1, p2, p3]).then(function (values) {
+        console.log("YOU WON!!");
+        victory("YOU WON!");
+    }).catch(gameOver);
 }
